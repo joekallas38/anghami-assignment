@@ -28,6 +28,46 @@ module.exports.validateRegisterInput = (
     };
 };
 
+module.exports.validateContactInput = (
+    name,
+    email,
+    phone,
+    job,
+    address
+) => {
+    const errors = {};
+    if (name.trim() === '') {
+        errors.name = 'Name must not be empty';
+    }
+    if (email.trim() === '') {
+        errors.email = 'Email must not be empty';
+    } else {
+        const regEx = /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
+        if (!email.match(regEx)) {
+            errors.email = 'Email must be a valid email address';
+        }
+    }
+    if (phone.trim() === '') {
+        errors.phone = 'Phone number must not be empty';
+    } else {
+        const phoneno = /^\d{8}$/;
+        if (!phone.match(phoneno)) {
+            errors.phoneno = 'Invalid phone number';
+        }
+    }
+    if (job.trim() === '') {
+        errors.job = 'Job title must not be empty';
+    }
+    if (address.trim() === '') {
+        errors.address = 'Address must not be empty';
+    }
+
+    return {
+        errors,
+        valid: Object.keys(errors).length < 1
+    };
+}
+
 module.exports.validateLoginInput = (username, password) => {
     const errors = {};
     if (username.trim() === '') {
