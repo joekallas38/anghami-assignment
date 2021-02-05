@@ -6,6 +6,8 @@ const contactSchema = new Schema({
     email: String,
     job: String,
     address: String,
+    username: String,
+    createdAt: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users'
