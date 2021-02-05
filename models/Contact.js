@@ -1,0 +1,15 @@
+const { model, Schema } = require('mongoose');
+
+const postSchema = new Schema({
+    name: String,
+    phone: String,
+    email: String,
+    job: String,
+    address: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    }
+});
+
+module.exports = model('Contact', postSchema);
