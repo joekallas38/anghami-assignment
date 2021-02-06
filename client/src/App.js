@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ContactForm from './pages/ContactForm';
+import ContactEdit from './pages/ContactEdit';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <MenuBar />
           <Route exact path="/" component={Home} />
           <Route exact path="/create" component={ContactForm} />
+          <Route path="/edit/:id" component={ContactEdit} />
           <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />
         </Container>

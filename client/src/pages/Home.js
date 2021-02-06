@@ -19,6 +19,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import DeleteButton from '../components/DeleteButton';
 
 function Home() {
     const { user } = useContext(AuthContext);
@@ -65,11 +66,12 @@ function Home() {
         },
         {
             title: 'Actions',
-            field: '_id',
-            // render: rowData => (
-            //     // edit
-            //     // <Link to={`/edit/${rowData._id}`}> edit </Link>
-            // )
+            field: 'id',
+            render: rowData => (
+                <Link to={`/edit/${rowData.id}`}> edit </Link>,
+                <DeleteButton contactId={rowData.id} />
+
+            )
         }
 
     ]

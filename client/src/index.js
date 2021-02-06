@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import ApolloProvider from './ApolloProvider'
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   ApolloProvider,
