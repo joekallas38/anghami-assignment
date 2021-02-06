@@ -1,9 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
-
-
+import { AuthContext } from '../context/auth';
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -22,7 +21,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 function Home() {
-
+    const { user } = useContext(AuthContext);
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
         Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -88,22 +87,29 @@ function Home() {
 
     return (
         <div>
-            <MaterialTable
-                icons={tableIcons}
-                columns={tableColumnConfig}
-                data={contacts}
-                options={{
-                    toolbar: true,
-                    search: true
-                }}
-            // actions={[
-            //     {
-            //         icon: 'delete',
-            //         tooltip: 'Delete User',
-            //         onClick: (event, rowData) => { remove(rowData._id) }
-            //     }
-            // ]}
-            />
+            <Link to={`/create`}> Add Contact </Link>
+            {user && (
+                <MaterialTable
+                    icons={tableIcons}
+                    columns={tableColumnConfig}
+                    data={contacts}
+                    options={{
+                        toolbar: true,
+                        search: true
+                    }}
+                // actions={[
+                //     {
+                //         icon: 'delete',
+                //         tooltip: 'Delete User',
+                //         onClick: (event, rowData) => { remove(rowData._id) }
+                //     }
+                // ]}
+                />
+
+
+            )
+            }
+
         </div>
     );
 }
