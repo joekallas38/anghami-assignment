@@ -52,7 +52,8 @@ module.exports = {
             const phoneNumber = await Contact.findOne({
                 $and: [
                     { "phone": phone },
-                    { "user": user.id }
+                    { "user": user.id },
+                    { "_id": { $ne: contactId } }
                 ]
             });
             if (phoneNumber) {
@@ -66,7 +67,8 @@ module.exports = {
             const emailExists = await Contact.findOne({
                 $and: [
                     { "email": email },
-                    { "user": user.id }
+                    { "user": user.id },
+                    { "_id": { $ne: contactId } }
                 ]
             });
             if (emailExists) {
