@@ -32,6 +32,7 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
     createContact(name: String!,email: String!,phone: String!, job:String!,address:String!): Contact!
+    updateContact(contactId: ID!, name: String!,email: String!,phone: String!, job:String!,address:String!): Contact!
     deleteContact(contactId: ID!): String!
   }
 `;

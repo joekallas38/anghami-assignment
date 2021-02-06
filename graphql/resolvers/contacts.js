@@ -34,6 +34,60 @@ module.exports = {
         }
     },
     Mutation: {
+        async updateContact(_, { contactId, name, email, phone, job, address }, context) {
+            const user = checkAuth(context);
+            console.log(user);
+            //Validate Contact
+            const { valid, errors } = validateContactInput(
+                name,
+                email,
+                phone,
+                job,
+                address
+            );
+            if (!valid) {
+                throw new UserInputError('Errors', { errors });
+            }
+            //check if phone already exists
+            const phoneNumber = await Contact.findOne({
+                $and: [
+                    { "phone": phone },
+                    { "user": user.id }
+                ]
+            });
+            if (phoneNumber) {
+                throw new UserInputError('Phone number already exists', {
+                    errors: {
+                        phone: 'Phone number already exists'
+                    }
+                });
+            }
+            //check if email already exists
+            const emailExists = await Contact.findOne({
+                $and: [
+                    { "email": email },
+                    { "user": user.id }
+                ]
+            });
+            if (emailExists) {
+                throw new UserInputError('Email already exists', {
+                    errors: {
+                        email: 'Email already exists'
+                    }
+                });
+            }
+
+            try {
+                //const contact = await Contact.findByIdAndUpdate(contactId, { $set: { "name": name, "phone": phone, "email": email, "job": job, "address": address } });
+                const contact = await Contact.findOneAndUpdate({ "user": user.id, "_id": contactId }, { $set: { "name": name, "phone": phone, "email": email, "job": job, "address": address } });
+                return contact;
+            } catch (err) {
+                throw new Error(err);
+            }
+        },
+
+
+
         async createContact(_, { name, email, phone, job, address }, context) {
             const user = checkAuth(context);
             console.log(user);
@@ -92,6 +146,8 @@ module.exports = {
 
             return contact;
         },
+
+
         async deleteContact(_, { contactId }, context) {
             const user = checkAuth(context);
 
