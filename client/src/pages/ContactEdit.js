@@ -56,6 +56,7 @@ function ContactEdit(props) {
                                             Edit Contact
                                           </h3>
                                     </div>
+                                    <h4><Link to="/" className="btn btn-primary footerBtn">Back</Link></h4>
                                     <div className="panel-body">
                                         <form onSubmit={e => {
                                             e.preventDefault();
@@ -101,7 +102,6 @@ function ContactEdit(props) {
                                                     job = node;
                                                 }} placeholder="Publisher" defaultValue={data.getContact.job} />
                                             </div>
-                                            <h4><Link to="/" className="btn btn-primary">Back</Link></h4>
                                             <button type="submit" className="btn btn-success">Submit</button>
                                         </form>
                                         {Object.keys(errors).length > 0 && (

@@ -45,6 +45,14 @@ function Home() {
 
     const tableColumnConfig = [
         {
+            title: '',
+            field: 'id',
+            render: rowData => (
+                <DeleteButton contactId={rowData.id} />
+
+            )
+        },
+        {
             title: 'Name',
             field: 'name'
         },
@@ -68,9 +76,7 @@ function Home() {
             title: 'Actions',
             field: 'id',
             render: rowData => (
-                <Link to={`/edit/${rowData.id}`}> edit </Link>,
-                <DeleteButton contactId={rowData.id} />
-
+                <Link to={`/edit/${rowData.id}`}> Edit </Link>
             )
         }
 
@@ -84,14 +90,15 @@ function Home() {
     else {
         contacts = [];
     }
-
-
-
     return (
         <div>
-            <Link to={`/create`}> Add Contact </Link>
+            {user && (
+                <h4><Link to={`/create`} className="btn btn-success">Add Contact</Link></h4>
+            )
+            }
             {user && (
                 <MaterialTable
+                    title="Contacts"
                     icons={tableIcons}
                     columns={tableColumnConfig}
                     data={contacts}
@@ -99,16 +106,7 @@ function Home() {
                         toolbar: true,
                         search: true
                     }}
-                // actions={[
-                //     {
-                //         icon: 'delete',
-                //         tooltip: 'Delete User',
-                //         onClick: (event, rowData) => { remove(rowData._id) }
-                //     }
-                // ]}
                 />
-
-
             )
             }
 

@@ -1,0 +1,21 @@
+.ui.modal{
+  background:none;
+  margin-left: 25% !important;
+  margin-top: 15% !important;
+  box-shadow:none !important;
+}
+.panel-heading{
+  margin-bottom:24px;
+}
+.footerBtn{
+  margin-bottom:12px;
+}
+.ui.red.button, .ui.red.buttons .button {
+  background-color: #ffffff;
+  color: #f00;
+  text-shadow: none;
+  background-image: none;
+  transform: scale(1.2);
+  float:none !important;
+  margin-left:25px !important;
+}
